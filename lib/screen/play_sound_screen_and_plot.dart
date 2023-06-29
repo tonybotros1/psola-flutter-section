@@ -48,7 +48,7 @@ class PlaySoundScreen extends StatelessWidget {
                   },
                   child: Container(
                     decoration: const BoxDecoration(
-                        color: const Color(0xff353b48),
+                        color: const Color(0xff353b48), 
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15),
@@ -65,7 +65,7 @@ class PlaySoundScreen extends StatelessWidget {
                         const SizedBox(
                           width: 40,
                         ),
-                        Expanded(child: Text('Name of the file')),
+                         Expanded(child: Text('Name of the file')),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: IconButton(
