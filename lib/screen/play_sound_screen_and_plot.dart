@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-
 import 'player_screen.dart';
 
 class PlaySoundScreen extends StatelessWidget {
@@ -48,7 +45,7 @@ class PlaySoundScreen extends StatelessWidget {
                   },
                   child: Container(
                     decoration: const BoxDecoration(
-                        color: const Color(0xff353b48), 
+                        color:  Color(0xff353b48),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15),
@@ -65,12 +62,12 @@ class PlaySoundScreen extends StatelessWidget {
                         const SizedBox(
                           width: 40,
                         ),
-                         Expanded(child: Text('Name of the file')),
+                        const Expanded(child: Text('Name of the file')),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: IconButton(
                               onPressed: () {},
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.play_circle_fill_rounded,
                                 color: Colors.white,
                                 size: 30,
