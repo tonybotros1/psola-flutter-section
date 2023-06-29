@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:psola/pages/MainPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,8 +9,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MainPage(),
-    );
+    return const Placeholder();
   }
 }
