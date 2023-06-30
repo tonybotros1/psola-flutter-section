@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-
 import 'player_screen.dart';
 
 class PlaySoundScreen extends StatelessWidget {

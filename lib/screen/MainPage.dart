@@ -6,6 +6,7 @@ import 'package:psola/constants.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
+import 'package:file_picker/file_picker.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -16,11 +17,14 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final recorder = FlutterSoundRecorder();
+  String? uploadedAudioPath;
   bool isRecorderReady = false;
+  bool isPickingFile = false;
 
   @override
   void initState() {
     initRecorder();
+    reset();
     super.initState();
   }
 
@@ -61,8 +65,28 @@ class _MainPageState extends State<MainPage> {
     await recorder.stopRecorder();
   }
 
+  Future pickFile() async {
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(type: FileType.custom, allowedExtensions: ['wav']);
+    if (result != null) {
+      File file = File(result.files.single.path.toString());
+      uploadedAudioPath = file.toString();
+      isPickingFile = true;
+    } else {
+      // User canceled the picker
+      isPickingFile = false;
+    }
+  }
+
+  void reset() {
+    uploadedAudioPath = null;
+    isPickingFile = false;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text("PSOLA"),
@@ -80,22 +104,42 @@ class _MainPageState extends State<MainPage> {
                       ? snapshot.data!.duration
                       : Duration.zero;
                   String twoDigits(int n) => n.toString().padLeft(2, '0');
-                  final twoDigitMinutes =
-                      twoDigits(duration.inMinutes.remainder(60));
-                  final twoDigitSeconds =
-                      twoDigits(duration.inSeconds.remainder(60));
-                  return Text('$twoDigitMinutes:$twoDigitSeconds');
+                  final twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+                  final twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+                  return Text(
+                    '$twoDigitMinutes:$twoDigitSeconds',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: size.width / 4,
+                    ),
+                  );
                 }),
             ElevatedButton(
-                onPressed: () async {
-                  if (recorder.isRecording) {
-                    await stop();
-                  } else {
-                    await record();
-                  }
-                  setState(() {});
-                },
-                child: Icon(recorder.isRecording ? Icons.stop : Icons.mic)),
+              onPressed: () async {
+                if (recorder.isRecording) {
+                  await stop();
+                } else {
+                  await record();
+                }
+                setState(() {});
+              },
+              child: Icon(recorder.isRecording ? Icons.stop : Icons.mic),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                if (!isPickingFile) {
+                  await pickFile();
+                } else {
+                  return;
+                }
+                setState(() {});
+              },
+              child: Icon(isPickingFile ? Icons.done : Icons.folder),
+            ),
+            ElevatedButton(
+              onPressed: () => reset(),
+              child: const Icon(Icons.restart_alt),
+            ),
           ],
         ),
       ),
