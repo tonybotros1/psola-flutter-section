@@ -1,5 +1,9 @@
+// ignore_for_file: unnecessary_import, implementation_imports
+
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+
 import 'player_screen.dart';
 
 class PlaySoundScreen extends StatelessWidget {
@@ -62,7 +66,7 @@ class PlaySoundScreen extends StatelessWidget {
                         const SizedBox(
                           width: 40,
                         ),
-                        const Expanded(child: Text('Name of the file')),
+                         const Expanded(child: Text('Name of the file')),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: IconButton(

@@ -1,8 +1,11 @@
+// ignore_for_file: file_names, depend_on_referenced_packages
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:psola/constants.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:path/path.dart' as path;
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -28,7 +31,10 @@ class _MainPageState extends State<MainPage> {
   }
 
   Future initRecorder() async {
+    audioPath;
     final state = await Permission.microphone.request();
+    await Permission.storage.request();
+    await Permission.manageExternalStorage.request();
     if (state != PermissionStatus.granted) {
       throw 'Microphone permission not granted';
     }
@@ -39,14 +45,20 @@ class _MainPageState extends State<MainPage> {
 
   Future record() async {
     if (!isRecorderReady) return;
-    await recorder.startRecorder(toFile: 'audio');
-
+    Directory directory = Directory(path.dirname(audioPath.toString()));
+    if (!directory.existsSync()) {
+      directory.createSync();
+    }
+    await recorder.startRecorder(
+      toFile: audioPath.toString(),
+      codec: Codec.pcm16WAV,
+      numChannels: 1,
+    );
   }
+
   Future stop() async {
     if (!isRecorderReady) return;
-    final path = await recorder.stopRecorder();
-    final audioFile = File(path!);
-    print(audioFile);
+    await recorder.stopRecorder();
   }
 
   @override
@@ -67,7 +79,7 @@ class _MainPageState extends State<MainPage> {
                   final duration = snapshot.hasData
                       ? snapshot.data!.duration
                       : Duration.zero;
-                  String twoDigits(int n) => n.toString().padLeft(2,'0');
+                  String twoDigits(int n) => n.toString().padLeft(2, '0');
                   final twoDigitMinutes =
                       twoDigits(duration.inMinutes.remainder(60));
                   final twoDigitSeconds =
