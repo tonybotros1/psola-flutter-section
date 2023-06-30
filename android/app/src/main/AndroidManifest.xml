@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.psola">
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
    <application
         android:label="psola"
         android:name="${applicationName}"
