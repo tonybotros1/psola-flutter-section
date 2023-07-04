@@ -8,14 +8,14 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
 import 'package:file_picker/file_picker.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+class StartScreen extends StatefulWidget {
+  const StartScreen({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<StartScreen> createState() => _StartScreenState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _StartScreenState extends State<StartScreen> {
   final recorder = FlutterSoundRecorder();
   String? uploadedAudioPath;
   bool isRecorderReady = false;

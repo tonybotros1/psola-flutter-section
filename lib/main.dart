@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:psola/screen/MainPage.dart';
+import 'package:psola/screen/startScreen.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      home: StartScreen(),
     );
   }
 }
