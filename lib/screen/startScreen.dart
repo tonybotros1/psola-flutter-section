@@ -2,11 +2,13 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:psola/constants.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
 import 'package:file_picker/file_picker.dart';
+import 'package:psola/screen/player_screen.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -17,7 +19,8 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   final recorder = FlutterSoundRecorder();
-  String? uploadedAudioPath;
+  File? selectedAudioPath;
+  String? recordedAudioPath;
   bool isRecorderReady = false;
   bool isPickingFile = false;
 
@@ -65,12 +68,20 @@ class _StartScreenState extends State<StartScreen> {
     await recorder.stopRecorder();
   }
 
+  bool check() {
+    if (selectedAudioPath != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future pickFile() async {
     FilePickerResult? result = await FilePicker.platform
-        .pickFiles(type: FileType.custom, allowedExtensions: ['wav']);
+        .pickFiles(type: FileType.custom, allowedExtensions: ['wav', 'mp3']);
     if (result != null) {
       File file = File(result.files.single.path.toString());
-      uploadedAudioPath = file.toString();
+      selectedAudioPath = file;
       isPickingFile = true;
     } else {
       // User canceled the picker
@@ -79,7 +90,7 @@ class _StartScreenState extends State<StartScreen> {
   }
 
   void reset() {
-    uploadedAudioPath = null;
+    selectedAudioPath = null;
     isPickingFile = false;
     setState(() {});
   }
@@ -103,9 +114,10 @@ class _StartScreenState extends State<StartScreen> {
                   final duration = snapshot.hasData
                       ? snapshot.data!.duration
                       : Duration.zero;
-                  String twoDigits(int n) => n.toString().padLeft(2, '0');
-                  final twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-                  final twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+                  final twoDigitMinutes =
+                      twoDigits(duration.inMinutes.remainder(60));
+                  final twoDigitSeconds =
+                      twoDigits(duration.inSeconds.remainder(60));
                   return Text(
                     '$twoDigitMinutes:$twoDigitSeconds',
                     style: TextStyle(
@@ -126,19 +138,29 @@ class _StartScreenState extends State<StartScreen> {
               child: Icon(recorder.isRecording ? Icons.stop : Icons.mic),
             ),
             ElevatedButton(
-              onPressed: () async {
-                if (!isPickingFile) {
-                  await pickFile();
-                } else {
-                  return;
-                }
-                setState(() {});
-              },
+              onPressed: isPickingFile
+                  ? null
+                  : () async {
+                      if (!isPickingFile) {
+                        await pickFile();
+                      } else {
+                        return;
+                      }
+                      setState(() {});
+                    },
               child: Icon(isPickingFile ? Icons.done : Icons.folder),
             ),
             ElevatedButton(
               onPressed: () => reset(),
               child: const Icon(Icons.restart_alt),
+            ),
+            ElevatedButton(
+              onPressed: check()
+                  ? () => Get.to(() => const PlayerScreen(),
+                      transition: Transition.rightToLeft,
+                      arguments: selectedAudioPath)
+                  : null,
+              child: const Icon(Icons.arrow_forward_ios_rounded),
             ),
           ],
         ),

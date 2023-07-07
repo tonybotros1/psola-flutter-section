@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:psola/constants.dart';
 import 'player_screen.dart';
 
 class PlaySoundScreen extends StatelessWidget {
@@ -13,31 +14,29 @@ class PlaySoundScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Psola'),
-        backgroundColor: const Color(0xff353b48),
+        backgroundColor: backgroundColor,
       ),
       body: Container(
-        color: const Color(0xff57606f),
+        color: containerColor,
         child: Column(
           children: [
             Expanded(
                 flex: 8,
-                child: Container(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
-                          ),
-                          child: SizedBox(
-                            height: 300,
-                            width: Get.width,
-                          ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
                         ),
-                      )
-                    ],
-                  ),
+                        child: SizedBox(
+                          height: 300,
+                          width: Get.width,
+                        ),
+                      ),
+                    )
+                  ],
                 )),
             Expanded(
                 flex: 1,
@@ -48,7 +47,7 @@ class PlaySoundScreen extends StatelessWidget {
                   },
                   child: Container(
                     decoration: const BoxDecoration(
-                        color:  Color(0xff353b48),
+                        color:  containerColor2,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15),
