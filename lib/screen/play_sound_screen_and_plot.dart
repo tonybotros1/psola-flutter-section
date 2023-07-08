@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:psola/constants.dart';
 import 'player_screen.dart';
 
 class PlaySoundScreen extends StatelessWidget {
@@ -14,40 +13,42 @@ class PlaySoundScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Psola'),
-        backgroundColor: backgroundColor,
+        backgroundColor: const Color(0xff353b48),
       ),
       body: Container(
-        color: containerColor,
+        color: const Color(0xff57606f),
         child: Column(
           children: [
             Expanded(
                 flex: 8,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white),
+                          ),
+                          child: SizedBox(
+                            height: 300,
+                            width: Get.width,
+                          ),
                         ),
-                        child: SizedBox(
-                          height: 300,
-                          width: Get.width,
-                        ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 )),
             Expanded(
                 flex: 1,
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(() => const PlayerScreen(),
+                    Get.to(() =>  PlayerScreen(),
                         transition: Transition.downToUp);
                   },
                   child: Container(
                     decoration: const BoxDecoration(
-                        color:  containerColor2,
+                        color:  Color(0xff353b48),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15),
