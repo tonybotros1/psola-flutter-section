@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'dart:typed_data';
 
 import '../model/plot_model.dart';
 
@@ -9,6 +12,9 @@ class PlayAndPlot extends GetxController {
   RxList<ChartData> chartData = RxList([]);
 
   AudioPlayer audioPlayer = AudioPlayer();
+
+  
+
 
   @override
   void onInit() {
@@ -38,4 +44,18 @@ class PlayAndPlot extends GetxController {
   void stopAudio() {
     audioPlayer.dispose();
   }
+
+
+
+// to convert the audio file to array so we can plot it:
+Future<List<int>> convertAudioTo1DArray(File audioFile) async {
+  // Read the audio file as bytes
+  Uint8List audioBytes = await audioFile.readAsBytes();
+
+  // Convert the audio bytes to a 1D array
+  List<int> audioArray = audioBytes.toList();
+
+  return audioArray;
+}
+
 }
