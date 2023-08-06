@@ -28,7 +28,6 @@ class StartScreenController extends GetxController {
   @override
   void onClose() {
     recorder.closeRecorder();
-
     super.onClose();
   }
 

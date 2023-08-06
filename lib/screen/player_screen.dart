@@ -6,16 +6,16 @@ import 'package:get/get.dart';
 
 import '../controller/player_screen_controller.dart';
 
-class PlayerScreen extends GetView<PlayerScreenContorller> {
+class PlayerScreen extends GetView<PlayerScreenController> {
   PlayerScreen({super.key});
 
-  PlayerScreenContorller playerScreenContorller =
-      Get.put(PlayerScreenContorller());
+  PlayerScreenController playerScreenController =
+      Get.put(PlayerScreenController());
 
   @override
   Widget build(BuildContext context) {
-    return GetX<PlayerScreenContorller>(
-        init: PlayerScreenContorller(),
+    return GetX<PlayerScreenController>(
+        init: PlayerScreenController(),
         builder: (controller) => Scaffold(
               backgroundColor: backgroundColor,
               appBar: AppBar(

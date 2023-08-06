@@ -1,9 +1,10 @@
-import 'dart:io';
+// ignore_for_file: depend_on_referenced_packages
 
+import 'dart:io';
 import 'package:get/get.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-class PlayerScreenContorller extends GetxController {
+class PlayerScreenController extends GetxController {
   AudioPlayer player = AudioPlayer();
   File record = Get.arguments;
   RxBool isPlaying = RxBool(false);

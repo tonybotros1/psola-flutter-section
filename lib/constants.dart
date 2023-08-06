@@ -10,3 +10,7 @@ final size = Get.size;
 String audioPath = 'storage/emulated/0/Download/${DateTime.now().hashCode}.wav';
 
 String twoDigits(int n) => n.toString().padLeft(2, '0');
+
+TextStyle slidersText(BuildContext ctx){
+  return TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: size.width/20);
+}
