@@ -7,6 +7,7 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:psola/screen/player_screen.dart';
 
 import '../controller/start_screen_controller.dart';
+import 'play_sound_screen_and_plot.dart';
 
 class StartScreen extends StatelessWidget {
   StartScreen({super.key});
@@ -82,7 +83,7 @@ class StartScreen extends StatelessWidget {
             GetBuilder<StartScreenController>(
                 builder: (controller) => ElevatedButton(
                       onPressed: controller.check()
-                          ? () => Get.to(() =>  PlayerScreen(),
+                          ? () => Get.to(() =>  PlaySoundScreen(),
                               transition: Transition.rightToLeft,
                               arguments: controller.selectedAudioPath)
                           : null,
