@@ -7,6 +7,7 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:psola/screen/player_screen.dart';
 
 import '../controller/start_screen_controller.dart';
+import 'audio_list_screen.dart';
 import 'play_sound_screen_and_plot.dart';
 
 class StartScreen extends StatelessWidget {
@@ -21,6 +22,16 @@ class StartScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("PSOLA"),
         backgroundColor: backgroundColor,
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                Get.to(() => AudioListScreen());
+              },
+              child: const Text(
+                'previous works',
+                style: TextStyle(fontSize: 15),
+              ))
+        ],
       ),
       backgroundColor: backgroundColor,
       body: Center(
@@ -71,9 +82,8 @@ class StartScreen extends StatelessWidget {
                                 return;
                               }
                             },
-                      child: Icon(controller.isPickingFile
-                          ? Icons.done
-                          : Icons.folder),
+                      child: Icon(
+                          controller.isPickingFile ? Icons.done : Icons.folder),
                     )),
             GetBuilder<StartScreenController>(
                 builder: (controller) => ElevatedButton(
@@ -83,7 +93,16 @@ class StartScreen extends StatelessWidget {
             GetBuilder<StartScreenController>(
                 builder: (controller) => ElevatedButton(
                       onPressed: controller.check()
-                          ? () => Get.to(() =>  PlaySoundScreen(),
+                          ? () => Get.to(() => PlayerScreen(),
+                              transition: Transition.rightToLeft,
+                              arguments: controller.selectedAudioPath)
+                          : null,
+                      child: const Icon(Icons.headphones),
+                    )),
+            GetBuilder<StartScreenController>(
+                builder: (controller) => ElevatedButton(
+                      onPressed: controller.check()
+                          ? () => Get.to(() => PlaySoundScreen(),
                               transition: Transition.rightToLeft,
                               arguments: controller.selectedAudioPath)
                           : null,

@@ -51,8 +51,8 @@ class PlaySoundScreen extends StatelessWidget {
                                         maxX: controller.waveformData.length
                                                 .toDouble() -
                                             1,
-                                        minY: -1,
-                                        maxY: 1,
+                                        minY: -2,
+                                        maxY: 2,
                                         // titlesData: FlTitlesData(
                                         //   bottomTitles:
                                         //       SideTitles(showTitles: false),
