@@ -49,7 +49,7 @@ class AudioListScreen extends StatelessWidget {
                                           arguments: snapshot.data![i].file);
                                     },
                                     child:
-                                        Text('${snapshot.data![i].filePath}')),
+                                        Text('${snapshot.data![i].fileName}')),
                               ),
                             );
                           });

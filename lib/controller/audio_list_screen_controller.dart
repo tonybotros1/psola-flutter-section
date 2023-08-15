@@ -6,8 +6,8 @@ import 'package:path/path.dart' as path;
 import 'package:psola/model/audios_model.dart';
 
 class AudioListScreenController extends GetxController {
+  late String audioName;
   List<AudiosFiles> audios = [];
-
 
   Future<List<AudiosFiles>> getAudios() async {
     Directory directory = Directory(path.dirname(audioDir.toString()));
@@ -16,8 +16,9 @@ class AudioListScreenController extends GetxController {
 
       for (final file in files) {
         if (file.path.endsWith('.wav')) {
-          final fileContent = await File(file.path);
-          final audioFile = AudiosFiles(filePath: file.path, file: fileContent);
+          final fileContent = File(file.path);
+          final audioFile = AudiosFiles(
+              fileName: path.basename(file.path), file: fileContent);
           audios.add(audioFile);
         }
       }
