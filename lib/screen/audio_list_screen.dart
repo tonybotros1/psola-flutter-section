@@ -6,7 +6,7 @@ import 'package:psola/controller/audio_list_screen_controller.dart';
 import 'package:psola/model/audios_model.dart';
 
 import '../constants.dart';
-import 'player_screen.dart';
+import 'play_sound_screen_and_plot.dart';
 
 class AudioListScreen extends StatelessWidget {
   AudioListScreen({super.key});
@@ -44,7 +44,7 @@ class AudioListScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(8)),
                                 child: ElevatedButton(
                                     onPressed: () {
-                                      Get.to(() => PlayerScreen(),
+                                      Get.to(() => PlaySoundScreen(),
                                           transition: Transition.rightToLeft,
                                           arguments: snapshot.data![i].file);
                                     },

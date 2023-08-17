@@ -1,52 +1,52 @@
-// ignore_for_file: depend_on_referenced_packages
+// // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:io';
-import 'package:get/get.dart';
-import 'package:audioplayers/audioplayers.dart';
+// import 'dart:io';
+// import 'package:get/get.dart';
+// import 'package:audioplayers/audioplayers.dart';
 
-class PlayerScreenController extends GetxController {
-  AudioPlayer player = AudioPlayer();
-  File record = Get.arguments;
-  RxBool isPlaying = RxBool(false);
-  Rx<Duration> duration = Rx<Duration>(Duration.zero);
-  Rx<Duration> position = Rx<Duration>(Duration.zero);
+// class PlayerScreenController extends GetxController {
+//   AudioPlayer player = AudioPlayer();
+//   File record = Get.arguments;
+//   RxBool isPlaying = RxBool(false);
+//   Rx<Duration> duration = Rx<Duration>(Duration.zero);
+//   Rx<Duration> position = Rx<Duration>(Duration.zero);
 
 
-  @override
-  void onInit() {
-    initAudio();
-    player.onPlayerStateChanged.listen((state) {
-      isPlaying.value = state == PlayerState.PLAYING;
-    });
-    player.onDurationChanged.listen((newDuration) {
-      duration.value = newDuration;
-    });
-    player.onAudioPositionChanged.listen((newPosition) {
-      position.value = newPosition;
-    });
-    super.onInit();
-  }
+//   @override
+//   void onInit() {
+//     initAudio();
+//     player.onPlayerStateChanged.listen((state) {
+//       isPlaying.value = state == PlayerState.PLAYING;
+//     });
+//     player.onDurationChanged.listen((newDuration) {
+//       duration.value = newDuration;
+//     });
+//     player.onAudioPositionChanged.listen((newPosition) {
+//       position.value = newPosition;
+//     });
+//     super.onInit();
+//   }
 
-  @override
-  void onClose() {
-    player.dispose();
+//   @override
+//   void onClose() {
+//     player.dispose();
 
-    super.onClose();
-  }
+//     super.onClose();
+//   }
 
-  Future<void> initAudio() async {
-    try {
-      await player.play(record.path, isLocal: true);
-    } catch (e) {
-      throw 'error reading the file';
-    }
-  }
+//   Future<void> initAudio() async {
+//     try {
+//       await player.play(record.path, isLocal: true);
+//     } catch (e) {
+//       throw 'error reading the file';
+//     }
+//   }
 
-  Future<void> play() async {
-    if (isPlaying.value) {
-      await player.pause();
-    } else {
-      await player.resume();
-    }
-  }
-}
+//   Future<void> play() async {
+//     if (isPlaying.value) {
+//       await player.pause();
+//     } else {
+//       await player.resume();
+//     }
+//   }
+// }

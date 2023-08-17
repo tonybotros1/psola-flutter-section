@@ -1,14 +1,116 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
-import 'dart:typed_data';
 
 import '../model/plot_model.dart';
 
 class PlayAndPlot extends GetxController {
-  RxList<double> waveformData = RxList<double>.of(
+  AudioPlayer player = AudioPlayer();
+  File record = Get.arguments;
+  RxBool isPlaying = RxBool(false);
+  Rx<Duration> duration = Rx<Duration>(Duration.zero);
+  Rx<Duration> position = Rx<Duration>(Duration.zero);
+
+ 
+  // RxList<double> waveformData = RxList<double>.of([]);
+  RxList<ChartData> chartData = RxList([]);
+
+  AudioPlayer audioPlayer = AudioPlayer();
+
+  // late File record = Get.arguments;
+  RxBool isLoading = RxBool(false);
+
+  @override
+  void onInit() {
+    // convertAudioTo1DArray(record);
+    generateChartData();
+    initAudio();
+    player.onPlayerStateChanged.listen((state) {
+      isPlaying.value = state == PlayerState.PLAYING;
+    });
+    player.onDurationChanged.listen((newDuration) {
+      duration.value = newDuration;
+    });
+    player.onAudioPositionChanged.listen((newPosition) {
+      position.value = newPosition;
+    });
+    super.onInit();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
+
+  @override
+  void onClose() {
+    player.dispose();
+
+    super.onClose();
+  }
+
+// to draw the chart
+  void generateChartData() {
+    for (int i = 0; i < waveformData.length; i++) {
+      chartData.add(ChartData(i.toDouble(), waveformData[i]));
+    }
+  }
+
+// for the player:
+  // void playAudio(filePath) {
+  //   audioPlayer.setFilePath(filePath);
+  //   audioPlayer.play();
+  // }
+
+  void stopAudio() {
+    audioPlayer.dispose();
+  }
+
+  Future<void> initAudio() async {
+    try {
+      await player.play(record.path, isLocal: true);
+    } catch (e) {
+      throw 'error reading the file';
+    }
+  }
+
+  Future<void> play() async {
+    if (isPlaying.value) {
+      await player.pause();
+    } else {
+      await player.resume();
+    }
+  }
+
+//   // to convert the audio file to array so we can plot it:
+//   Future<List<double>> convertAudioTo1DArray(File audioFile) async {
+//   try {
+//     // Read the audio file as bytes
+//     Uint8List audioBytes = await audioFile.readAsBytes();
+
+//     // Convert the audio bytes to a 1D array of doubles with two decimal places
+//     List<double> audioArray = audioBytes.map((byte) => (byte.toDouble() / 255).toDouble()).toList();
+
+//     // Convert the doubles to strings with two decimal places
+//     List<String> formattedAudioArray = audioArray.map((value) => value.toStringAsFixed(5)).toList();
+
+//     // Convert the strings back to doubles
+//     audioArray = formattedAudioArray.map((value) => double.parse(value)).toList();
+
+//     waveformData.addAll(audioArray);
+
+//     print(waveformData);
+//     isLoading.value = false;
+//     return audioArray;
+//   } catch (e) {
+//     print("Error: $e");
+//     throw Exception('An error occurred while converting audio.');
+//   }
+// }
+
+ RxList<double> waveformData = RxList<double>.of(
       // [0.1, 0.2, 0.3, 0.2, 0.1, -0.1, -0.2, -0.3, -0.2, -0.1]
 
       [
@@ -331,69 +433,6 @@ class PlayAndPlot extends GetxController {
         -1.0000000000,
         -0.4174197128,
         -0.3535533906,
-        -1.2552931065,
+        -1.2552931065
       ]);
-  // RxList<double> waveformData = RxList<double>.of([]);
-  RxList<ChartData> chartData = RxList([]);
-
-  AudioPlayer audioPlayer = AudioPlayer();
-
-  late File record = Get.arguments;
-  RxBool isLoading = RxBool(false);
-
-  @override
-  void onInit() {
-    // convertAudioTo1DArray(record);
-    generateChartData();
-    super.onInit();
-  }
-
-  @override
-  void dispose() {
-    audioPlayer.dispose();
-    super.dispose();
-  }
-
-// to draw the chart
-  void generateChartData() {
-    for (int i = 0; i < waveformData.length; i++) {
-      chartData.add(ChartData(i.toDouble(), waveformData[i]));
-    }
-  }
-
-// for the player:
-  void playAudio(filePath) {
-    audioPlayer.setFilePath(filePath);
-    audioPlayer.play();
-  }
-
-  void stopAudio() {
-    audioPlayer.dispose();
-  }
-
-//   // to convert the audio file to array so we can plot it:
-//   Future<List<double>> convertAudioTo1DArray(File audioFile) async {
-//   try {
-//     // Read the audio file as bytes
-//     Uint8List audioBytes = await audioFile.readAsBytes();
-
-//     // Convert the audio bytes to a 1D array of doubles with two decimal places
-//     List<double> audioArray = audioBytes.map((byte) => (byte.toDouble() / 255).toDouble()).toList();
-
-//     // Convert the doubles to strings with two decimal places
-//     List<String> formattedAudioArray = audioArray.map((value) => value.toStringAsFixed(5)).toList();
-
-//     // Convert the strings back to doubles
-//     audioArray = formattedAudioArray.map((value) => double.parse(value)).toList();
-
-//     waveformData.addAll(audioArray);
-
-//     print(waveformData);
-//     isLoading.value = false;
-//     return audioArray;
-//   } catch (e) {
-//     print("Error: $e");
-//     throw Exception('An error occurred while converting audio.');
-//   }
-// }
 }

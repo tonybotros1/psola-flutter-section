@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:psola/constants.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:psola/screen/audio_manipulation%20_screen.dart';
-import 'package:psola/screen/player_screen.dart';
 
 import '../controller/start_screen_controller.dart';
 import 'audio_list_screen.dart';
@@ -123,25 +122,25 @@ class StartScreen extends StatelessWidget {
                         ),
                       )),
             ),
-            Padding(
-              padding: buttonPadding(),
-              child: GetBuilder<StartScreenController>(
-                builder: (controller) => ElevatedButton(
-                  onPressed: controller.check()
-                      ? () => Get.to(() => PlayerScreen(),
-                          transition: Transition.rightToLeft,
-                          arguments: controller.selectedAudioPath)
-                      : null,
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.headphones),
-                      Text('Play audio'),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: buttonPadding(),
+            //   child: GetBuilder<StartScreenController>(
+            //     builder: (controller) => ElevatedButton(
+            //       onPressed: controller.check()
+            //           ? () => Get.to(() => PlaySoundScreen(),
+            //               transition: Transition.rightToLeft,
+            //               arguments: controller.selectedAudioPath)
+            //           : null,
+            //       child: const Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Icon(Icons.headphones),
+            //           Text('Play audio'),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Padding(
               padding: buttonPadding(),
               child: GetBuilder<StartScreenController>(
