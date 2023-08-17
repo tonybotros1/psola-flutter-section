@@ -18,7 +18,7 @@ class AudioListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your records '),
+        title: const Text('Your records'),
         backgroundColor: backgroundColor,
       ),
       backgroundColor: backgroundColor,

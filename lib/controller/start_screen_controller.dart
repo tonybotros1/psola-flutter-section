@@ -7,7 +7,6 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart' as path;
 import 'package:permission_handler/permission_handler.dart';
-
 import '../constants.dart';
 
 class StartScreenController extends GetxController {

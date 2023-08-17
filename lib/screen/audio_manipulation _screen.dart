@@ -1,3 +1,5 @@
+
+
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
@@ -7,23 +9,21 @@ import 'package:psola/controller/audio_manipulation_screen_controller.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:action_slider/action_slider.dart';
 
-class AudioManipulationScreen extends StatelessWidget {
-  AudioManipulationScreen({super.key});
+class AudioManipulationScreen extends StatefulWidget {
+  const AudioManipulationScreen({super.key});
 
+  @override
+  State<AudioManipulationScreen> createState() =>
+      _AudioManipulationScreenState();
+}
+
+class _AudioManipulationScreenState extends State<AudioManipulationScreen> {
   final AudioManipulationController audioManipulationController =
       Get.put(AudioManipulationController());
 
-  // double amplitude = 1.0;
-
-  // double timeStretch = 1.0;
-
-  // double pitshScale = 1.0;
-
-  // final double _min = 0.25;
-
-  // final double _max = 2.0;
-
-  // final double _step = 0.25;
+  bool lpcPressed = false;
+  bool dwtPressed = false;
+  bool wptPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +39,51 @@ class AudioManipulationScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed:lpcPressed? null: () {
+                    setState(() {
+                      lpcPressed = false;
+                      dwtPressed = true;
+                      wptPressed = true;
+                    });
+                  },
+                  child: const Text('LPC'),
+                ),
+                ElevatedButton(
+                  onPressed:dwtPressed? null: () {
+                    setState(() {
+                      lpcPressed = true;
+                      dwtPressed = false;
+                      wptPressed = true;
+                    });
+                  },
+                  child: const Text('DWT'),
+                ),
+                ElevatedButton(
+                  onPressed:wptPressed? null: () {
+                    setState(() {
+                      lpcPressed = true;
+                      dwtPressed = true;
+                      wptPressed = false;
+                    });
+                  },
+                  child: const Text('WPT'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      lpcPressed = false;
+                      dwtPressed = false;
+                      wptPressed = false;
+                    });
+                  },
+                  child: const Icon(Icons.restart_alt),
+                ),
+              ],
+            ),
             Text(
               'Change audio\'s Amplitude:',
               style: slidersText(context),

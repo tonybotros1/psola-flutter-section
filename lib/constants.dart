@@ -18,3 +18,7 @@ TextStyle slidersText(BuildContext ctx) {
       fontWeight: FontWeight.bold,
       fontSize: size.width / 20);
 }
+
+EdgeInsets buttonPadding(){
+  return EdgeInsets.only(left: size.width/4,right: size.width/4);
+}

@@ -1,11 +1,13 @@
-// ignore_for_file: unnecessary_import, implementation_imports
+// ignore_for_file: unnecessary_import, implementation_imports, depend_on_referenced_packages
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:psola/constants.dart';
+import 'package:psola/screen/player_screen.dart';
 import '../controller/play_sound_screen_and_plot.dart';
-import 'player_screen.dart';
+import 'audio_manipulation _screen.dart';
 
 class PlaySoundScreen extends StatelessWidget {
   PlaySoundScreen({super.key});
@@ -15,123 +17,109 @@ class PlaySoundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Psola'),
-          backgroundColor: const Color(0xff353b48),
-        ),
-        body: GetX<PlayAndPlot>(
-            init: PlayAndPlot(),
-            builder: (controller) {
-              if (controller.isLoading.isTrue) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return Container(
-                  color: const Color(0xff57606f),
-                  child: Column(
-                    children: [
-                      Expanded(
-                          flex: 8,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(8, 20, 8, 20),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white),
-                                  ),
-                                  child: SizedBox(
-                                    height: 300,
-                                    width: Get.width,
-                                    child: LineChart(
-                                      LineChartData(
-                                        minX: 0,
-                                        maxX: controller.waveformData.length
-                                                .toDouble() -
-                                            1,
-                                        minY: -2,
-                                        maxY: 2,
-                                        // titlesData: FlTitlesData(
-                                        //   bottomTitles:
-                                        //       SideTitles(showTitles: false),
-                                        //   leftTitles:
-                                        //       SideTitles(showTitles: false),
-                                        // ),
-                                        lineBarsData: [
-                                          LineChartBarData(
-                                            spots: controller.waveformData
-                                                .asMap()
-                                                .entries
-                                                .map((entry) {
-                                              return FlSpot(
-                                                  entry.key.toDouble(),
-                                                  entry.value);
-                                            }).toList(),
-                                            isCurved: false,
-                                            color: Colors.blue,
-                                            barWidth: 2,
-                                            dotData: FlDotData(show: false),
-                                            belowBarData:
-                                                BarAreaData(show: false),
-                                          ),
-                                        ],
-                                      ),
+      appBar: AppBar(
+        title: const Text('Psola'),
+        backgroundColor: backgroundColor,
+      ),
+      body: GetX<PlayAndPlot>(
+        init: PlayAndPlot(),
+        builder: (controller) {
+          if (controller.isLoading.isTrue) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Container(
+              color: containerColor,
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 8,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              size.width * 0.01,
+                              size.width / 20,
+                              size.width * 0.01,
+                              size.width / 20),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                            ),
+                            child: SizedBox(
+                              height: 300,
+                              width: Get.width,
+                              child: LineChart(
+                                LineChartData(
+                                  minX: 0,
+                                  maxX: controller.waveformData.length
+                                          .toDouble() -
+                                      1,
+                                  minY: -2,
+                                  maxY: 2,
+                                  // titlesData: FlTitlesData(
+                                  //   bottomTitles:
+                                  //       SideTitles(showTitles: false),
+                                  //   leftTitles:
+                                  //       SideTitles(showTitles: false),
+                                  // ),
+                                  lineBarsData: [
+                                    LineChartBarData(
+                                      spots: controller.waveformData
+                                          .asMap()
+                                          .entries
+                                          .map((entry) {
+                                        return FlSpot(
+                                            entry.key.toDouble(), entry.value);
+                                      }).toList(),
+                                      isCurved: false,
+                                      color: Colors.blue,
+                                      barWidth: 2,
+                                      dotData: FlDotData(show: false),
+                                      belowBarData: BarAreaData(show: false),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              )
-                            ],
-                          )),
-                      Expanded(
-                          flex: 1,
-                          child: GestureDetector(
-                            onTap: () {
-                              Get.to(() => PlayerScreen(),
-                                  transition: Transition.rightToLeft,
-                                  arguments: controller.record);
-                            },
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                  color: Color(0xff353b48),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15),
-                                  )),
-                              child: Row(
+                              ),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () => Get.to(() => PlayerScreen(),
+                                    transition: Transition.rightToLeft,
+                                    arguments: controller.record),
+                              child: const Row(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: SizedBox(
-                                        width: 50,
-                                        height: 50,
-                                        child: Image.asset(
-                                            'assets/images/player.png')),
-                                  ),
-                                  const SizedBox(
-                                    width: 40,
-                                  ),
-                                  const Expanded(
-                                      child: Text('Name of the file')),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                          Icons.play_circle_fill_rounded,
-                                          color: Colors.white,
-                                          size: 30,
-                                        )),
-                                  )
+                                  Icon(Icons.arrow_back_ios_new_rounded),
+                                  Text('play'),
                                 ],
                               ),
                             ),
-                          )),
-                    ],
+                            ElevatedButton(
+                                onPressed: () => Get.to(() => const AudioManipulationScreen(),
+                                    transition: Transition.rightToLeft),
+                              child: const Row(
+                                children: [
+                                  Text('edit'),
+                                  Icon(Icons.arrow_forward_ios_rounded),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                );
-              }
-            }));
+                ],
+              ),
+            );
+          }
+        },
+      ),
+    );
   }
 }

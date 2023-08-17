@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'screen/audio_list_screen.dart';
-import 'screen/audio_manipulation _screen.dart';
 import 'screen/startScreen.dart';
 
 void main() {
