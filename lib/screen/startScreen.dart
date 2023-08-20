@@ -146,8 +146,9 @@ class StartScreen extends StatelessWidget {
               child: GetBuilder<StartScreenController>(
                 builder: (controller) => ElevatedButton(
                   onPressed: controller.check()
-                      ? () => Get.to(() => const AudioManipulationScreen(),
-                          transition: Transition.rightToLeft)
+                      ? () => Get.to(() => AudioManipulationScreen(),
+                          transition: Transition.rightToLeft,
+                          arguments: controller.selectedAudioPath)
                       : null,
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

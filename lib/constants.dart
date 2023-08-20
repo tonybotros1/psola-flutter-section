@@ -12,6 +12,8 @@ String audioDir = '/storage/emulated/0/Psola/Psola';
 
 String twoDigits(int n) => n.toString().padLeft(2, '0');
 
+String BACKENDURL = 'http://192.168.43.247:5000';
+
 TextStyle slidersText(BuildContext ctx) {
   return TextStyle(
       color: Colors.white,
@@ -19,6 +21,6 @@ TextStyle slidersText(BuildContext ctx) {
       fontSize: size.width / 20);
 }
 
-EdgeInsets buttonPadding(){
-  return EdgeInsets.only(left: size.width/4,right: size.width/4);
+EdgeInsets buttonPadding() {
+  return EdgeInsets.only(left: size.width / 4, right: size.width / 4);
 }
