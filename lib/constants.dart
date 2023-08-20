@@ -8,11 +8,12 @@ final size = Get.size;
 // final size = MediaQuery.of(context).size;
 
 String audioPath = 'storage/emulated/0/Psola/${DateTime.now().hashCode}.wav';
+String newAudioPath = 'storage/emulated/0/Psola/';
 String audioDir = '/storage/emulated/0/Psola/Psola';
 
 String twoDigits(int n) => n.toString().padLeft(2, '0');
 
-String BACKENDURL = 'http://192.168.43.247:5000';
+String BACKENDURL = 'http://192.168.1.108:5000';
 
 TextStyle slidersText(BuildContext ctx) {
   return TextStyle(

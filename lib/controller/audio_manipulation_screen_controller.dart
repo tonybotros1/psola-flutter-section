@@ -1,7 +1,12 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:psola/constants.dart';
-import 'package:http_parser/http_parser.dart'; // Add this import
+import 'package:http_parser/http_parser.dart';
+
+import '../screen/audio_list_screen.dart';
 
 class AudioManipulationController extends GetxController {
   var selectedAudio = Get.arguments;
@@ -49,7 +54,7 @@ class AudioManipulationController extends GetxController {
   }
 
 // to send the audio to python section:
-  Future<http.StreamedResponse> uploadAudioFile() async {
+  Future<File> uploadAudioFile() async {
     var uri = Uri.parse('$BACKENDURL/${algorithmName.value}');
     print("tttttttttttttttttttttttttttttttttttt: $uri");
 
@@ -71,14 +76,37 @@ class AudioManipulationController extends GetxController {
     request.fields['Pitch_shift'] = "${pitshScale.value}";
 
     var response = await request.send();
-    var responseData = await response.stream.bytesToString();
-    print("Response Data: $responseData");
+    String filename='';
+    // File file = response;
+    // saveAudioFileToSpecificPath(file, audioPath);
+    // var responseData = await response.stream.bytesToString();
+    // print("Response Data: $responseData");
 
     if (response.statusCode == 200) {
       print('File uploaded successfully');
+      final header = response.headers['content-disposition'];
+      filename = header!
+          .split(';')
+          .firstWhere((element) => element.trim().startsWith('filename='))
+          .substring('filename='.length+1);
+
+      print('Received filename: $filename');
     } else {
       print('Error uploading file');
     }
-    return response;
+    var responseBody = await response.stream.toBytes();
+    File receivedAudioFile = await saveAudioFileToSpecificPath(
+        responseBody, '$newAudioPath/$filename');
+    return receivedAudioFile;
+  }
+
+  Future<File> saveAudioFileToSpecificPath(
+      Uint8List audioData, String destinationPath) async {
+    // Directory appDocumentsDirectory = await getApplicationDocumentsDirectory();
+    File destinationFile = File(destinationPath);
+
+    await destinationFile.writeAsBytes(audioData);
+    Get.to(() => AudioListScreen());
+    return destinationFile;
   }
 }

@@ -112,7 +112,7 @@ class PlaySoundScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                         ),
                         Column(

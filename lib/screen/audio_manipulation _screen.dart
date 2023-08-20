@@ -170,6 +170,7 @@ class AudioManipulationScreen extends StatelessWidget {
                   await Future.delayed(const Duration(seconds: 1));
                   controller.reset(); //resets the slider
                   controller2.uploadAudioFile();
+                  
                 },
                 child: const Text('Confirm'),
               );
