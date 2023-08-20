@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:path/path.dart' as path;
 import 'package:permission_handler/permission_handler.dart';
 import '../constants.dart';
+import 'package:http/http.dart' as http;
 
 class StartScreenController extends GetxController {
   final recorder = FlutterSoundRecorder();
@@ -91,5 +92,34 @@ class StartScreenController extends GetxController {
     selectedAudioPath = null;
     isPickingFile = false;
     update();
+  }
+
+// to send the audio to python section:
+  Future<http.StreamedResponse> uploadAudioFile() async {
+    var uri = Uri.parse('http://your-flask-server-url/upload');
+
+    var request = http.MultipartRequest('POST', uri);
+
+    // Add audio file
+    var file = await http.MultipartFile.fromPath(
+        'audio', selectedAudioPath!.path,
+        // contentType: MediaType('audio', 'wav')
+        );
+    request.files.add(file);
+
+    // Add parameters
+    request.fields['param1'] = 'value1';
+    request.fields['param2'] = 'value2';
+
+    var response = await request.send();
+    var responseData = await response.stream.bytesToString();
+    print(responseData);
+
+    if (response.statusCode == 200) {
+      print('File uploaded successfully');
+    } else {
+      print('Error uploading file');
+    }
+    return response;
   }
 }

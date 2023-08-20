@@ -100,8 +100,9 @@ class PlaySoundScreen extends StatelessWidget {
                             // ),
                             ElevatedButton(
                               onPressed: () => Get.to(
-                                  () => const AudioManipulationScreen(),
-                                  transition: Transition.rightToLeft),
+                                  () =>  AudioManipulationScreen(),
+                                  transition: Transition.rightToLeft,
+                                  arguments: controller.record),
                               child: const Row(
                                 children: [
                                   Text('edit'),
