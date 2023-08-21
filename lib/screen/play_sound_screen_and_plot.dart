@@ -6,7 +6,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:psola/constants.dart';
 import '../controller/play_sound_screen_and_plot.dart';
-import 'audio_manipulation _screen.dart';
 
 class PlaySoundScreen extends StatelessWidget {
   PlaySoundScreen({super.key});

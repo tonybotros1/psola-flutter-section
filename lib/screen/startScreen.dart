@@ -8,7 +8,6 @@ import 'package:psola/screen/audio_manipulation%20_screen.dart';
 
 import '../controller/start_screen_controller.dart';
 import 'audio_list_screen.dart';
-import 'play_sound_screen_and_plot.dart';
 
 class StartScreen extends StatelessWidget {
   StartScreen({super.key});
@@ -21,9 +20,11 @@ class StartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("PSOLA"),
-        backgroundColor: backgroundColor,
+        backgroundColor: appBarColor,
         actions: [
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: elevatedButtonColor),
             onPressed: () {
               Get.to(() => AudioListScreen());
             },
@@ -65,6 +66,8 @@ class StartScreen extends StatelessWidget {
               padding: buttonPadding(),
               child: GetBuilder<StartScreenController>(
                 builder: (controller) => ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: elevatedButtonColor),
                     onPressed: () async {
                       if (controller.recorder.isRecording) {
                         await controller.stop();
@@ -89,6 +92,8 @@ class StartScreen extends StatelessWidget {
               padding: buttonPadding(),
               child: GetBuilder<StartScreenController>(
                 builder: (controller) => ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: elevatedButtonColor),
                   onPressed: controller.isPickingFile
                       ? null
                       : () async {
@@ -115,6 +120,8 @@ class StartScreen extends StatelessWidget {
               padding: buttonPadding(),
               child: GetBuilder<StartScreenController>(
                   builder: (controller) => ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: elevatedButtonColor),
                         onPressed: () => controller.reset(),
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,6 +152,8 @@ class StartScreen extends StatelessWidget {
               padding: buttonPadding(),
               child: GetBuilder<StartScreenController>(
                 builder: (controller) => ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor:elevatedButtonColor),
                   onPressed: controller.check()
                       ? () => Get.to(() => AudioManipulationScreen(),
                           transition: Transition.rightToLeft,

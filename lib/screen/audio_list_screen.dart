@@ -19,7 +19,7 @@ class AudioListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your records'),
-        backgroundColor: backgroundColor,
+        backgroundColor: appBarColor,
       ),
       backgroundColor: backgroundColor,
       body: GetBuilder<AudioListScreenController>(
@@ -45,6 +45,9 @@ class AudioListScreen extends StatelessWidget {
                                 child: GetX<AudioListScreenController>(
                                     builder: (controller) {
                                   return ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: elevatedButtonColor
+                                    ),
                                     onPressed: controller.isLoadingValues[i]
                                         ? null
                                         : () async {

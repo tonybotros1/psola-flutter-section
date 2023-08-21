@@ -1,9 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-const backgroundColor = Color(0xff353b48);
+// const backgroundColor = Color(0xff353b48);
+
+// const backgroundColor = Color(0xff57606f);
+// const appBarColor = Color(0xff353b48);
+// const elevatedButtonColor = Color(0xfff0932b);
+// const containerColor = Color(0xff57606f);
+// const containerColor2 = Color(0xff353b48);
+
+// const backgroundColor = Color(0xffB09B71);
+// const appBarColor = Color(0xff87805E);
+// const elevatedButtonColor = Color(0xffD8CCA3);
+// const containerColor = Color(0xff57606f);
+// const containerColor2 = Color(0xff353b48);
+
+// const backgroundColor = Color(0xff526D82);
+// const appBarColor = Color(0xff27374D);
+// const elevatedButtonColor = Color(0xff9DB2BF);
+// const containerColor = Color(0xff57606f);
+// const containerColor2 = Color(0xff353b48);
+
+// const backgroundColor = Color(0xffDBDBDB);
+// const appBarColor = Color(0xffCF7500);
+// const elevatedButtonColor = Color(0xffF0A500);
+// const containerColor = Color(0xff57606f);
+// const containerColor2 = Color(0xff353b48);
+
+const backgroundColor = Color(0xffF1E3CB);
+const appBarColor = Color(0xff222f3e);
+const elevatedButtonColor = Color(0xffF9B384);
 const containerColor = Color(0xff57606f);
 const containerColor2 = Color(0xff353b48);
+
 final size = Get.size;
 // final size = MediaQuery.of(context).size;
 

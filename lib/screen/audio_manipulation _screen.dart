@@ -19,7 +19,7 @@ class AudioManipulationScreen extends StatelessWidget {
       backgroundColor: backgroundColor,
       appBar: AppBar(
         title: const Text("Audio Manipulation"),
-        backgroundColor: backgroundColor,
+        backgroundColor: appBarColor,
       ),
       body: Container(
         padding: EdgeInsets.all(size.width / 20),
@@ -34,6 +34,8 @@ class AudioManipulationScreen extends StatelessWidget {
                     init: AudioManipulationController(),
                     builder: (controller) {
                       return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: elevatedButtonColor),
                         onPressed: controller.lpcPressed.value
                             ? null
                             : () {
@@ -45,6 +47,8 @@ class AudioManipulationScreen extends StatelessWidget {
                     }),
                 GetBuilder<AudioManipulationController>(builder: (controller) {
                   return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: elevatedButtonColor),
                     onPressed: controller.dwtPressed.value
                         ? null
                         : () {
@@ -57,6 +61,8 @@ class AudioManipulationScreen extends StatelessWidget {
                 }),
                 GetBuilder<AudioManipulationController>(builder: (controller) {
                   return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: elevatedButtonColor),
                     onPressed: controller.wptPressed.value
                         ? null
                         : () {
@@ -83,7 +89,7 @@ class AudioManipulationScreen extends StatelessWidget {
             ),
             GetX<AudioManipulationController>(builder: (controller) {
               return SfSlider(
-                activeColor: Colors.redAccent.shade400,
+                activeColor: const Color(0xffe84118),
                 inactiveColor: Colors.green.shade50,
                 value: controller.amplitude.value,
                 onChanged: (value) {
@@ -146,7 +152,7 @@ class AudioManipulationScreen extends StatelessWidget {
                 sliderBehavior: SliderBehavior.stretch,
                 rolling: true,
                 width: 300.0,
-                backgroundColor: Colors.blueAccent,
+                backgroundColor: elevatedButtonColor,
                 toggleColor: Colors.white,
                 iconAlignment: Alignment.centerRight,
                 loadingIcon: const SizedBox(
@@ -170,7 +176,6 @@ class AudioManipulationScreen extends StatelessWidget {
                   await Future.delayed(const Duration(seconds: 1));
                   controller.reset(); //resets the slider
                   controller2.uploadAudioFile();
-                  
                 },
                 child: const Text('Confirm'),
               );
