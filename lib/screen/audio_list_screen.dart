@@ -46,8 +46,7 @@ class AudioListScreen extends StatelessWidget {
                                     builder: (controller) {
                                   return ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: elevatedButtonColor
-                                    ),
+                                        backgroundColor: elevatedButtonColor),
                                     onPressed: controller.isLoadingValues[i]
                                         ? null
                                         : () async {
@@ -66,7 +65,9 @@ class AudioListScreen extends StatelessWidget {
                                                     array: controller.array));
                                           },
                                     child: controller.isLoadingValues[i]
-                                        ? const CircularProgressIndicator() // Show loading indicator on the button
+                                        ? const CircularProgressIndicator(
+                                            color: Color(0xffCA5116),
+                                          ) // Show loading indicator on the button
                                         : Text('${snapshot.data![i].fileName}'),
                                   );
                                 }),
