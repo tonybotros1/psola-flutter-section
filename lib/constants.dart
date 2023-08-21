@@ -28,7 +28,7 @@ import 'package:get/get.dart';
 // const containerColor2 = Color(0xff353b48);
 
 const backgroundColor = Color(0xffF1E3CB);
-const appBarColor = Color(0xff222f3e);
+const appBarColor = Color(0xffCA5116);
 const elevatedButtonColor = Color(0xffF9B384);
 const containerColor = Color(0xff57606f);
 const containerColor2 = Color(0xff353b48);
