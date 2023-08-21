@@ -12,6 +12,8 @@ class AudioListScreenController extends GetxController {
   late String audioName;
   List<AudiosFiles> audios = [];
   late String fileName;
+  RxList isLoadingValues = RxList([]);
+  RxList<double> array = RxList([]);
 
   Future<List<AudiosFiles>> getAudios() async {
     Directory directory = Directory(path.dirname(audioDir.toString()));
@@ -39,15 +41,13 @@ class AudioListScreenController extends GetxController {
 
     if (response.statusCode == 200) {
       var responseBody = jsonDecode(response.body);
-      // Get.snackbar('Success', 'enjoy listening',
-      //     snackPosition: SnackPosition.BOTTOM);
-      print(responseBody['array']);
+      var responseArray = List<dynamic>.from(responseBody['array']);
+      // array.addAll(responseBody['array']);
+      array.addAll(responseArray.map((element) => element.toDouble()));
+      print("array aaaaaaaaaaaaaa: ${array}");
     } else {
-      // Get.showSnackbar(const GetSnackBar(
-      //   message: 'Something went wrong',
-      //   messageText: Text('please try again'),
-      //   snackPosition: SnackPosition.BOTTOM,
-      // ));
+      update();
+      print('Error with status code');
     }
   }
 }

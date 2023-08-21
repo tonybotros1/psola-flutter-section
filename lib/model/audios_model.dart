@@ -3,5 +3,6 @@ import 'dart:io';
 class AudiosFiles {
   final File? file;
   final String? fileName;
-  AudiosFiles({this.file, this.fileName});
+  final List<double>? array;
+  AudiosFiles({this.file, this.fileName,this.array});
 }

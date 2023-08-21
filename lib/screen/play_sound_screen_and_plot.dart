@@ -84,34 +84,34 @@ class PlaySoundScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            // ElevatedButton(
-                            //     onPressed: () => Get.to(() => PlaySoundScreen(),
-                            //         transition: Transition.rightToLeft,
-                            //         arguments: controller.record),
-                            //   child: const Row(
-                            //     children: [
-                            //       Icon(Icons.arrow_back_ios_new_rounded),
-                            //       Text('play'),
-                            //     ],
-                            //   ),
-                            // ),
-                            ElevatedButton(
-                              onPressed: () => Get.to(
-                                  () =>  AudioManipulationScreen(),
-                                  transition: Transition.rightToLeft,
-                                  arguments: controller.record),
-                              child: const Row(
-                                children: [
-                                  Text('edit'),
-                                  Icon(Icons.arrow_forward_ios_rounded),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //   children: [
+                        //     // ElevatedButton(
+                        //     //     onPressed: () => Get.to(() => PlaySoundScreen(),
+                        //     //         transition: Transition.rightToLeft,
+                        //     //         arguments: controller.record),
+                        //     //   child: const Row(
+                        //     //     children: [
+                        //     //       Icon(Icons.arrow_back_ios_new_rounded),
+                        //     //       Text('play'),
+                        //     //     ],
+                        //     //   ),
+                        //     // ),
+                        //     ElevatedButton(
+                        //       onPressed: () => Get.to(
+                        //           () =>  AudioManipulationScreen(),
+                        //           transition: Transition.rightToLeft,
+                        //           arguments: controller.record),
+                        //       child: const Row(
+                        //         children: [
+                        //           Text('edit'),
+                        //           Icon(Icons.arrow_forward_ios_rounded),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                         const SizedBox(
                           height: 50,
                         ),

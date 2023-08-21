@@ -160,25 +160,25 @@ class StartScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: buttonPadding(),
-              child: GetBuilder<StartScreenController>(
-                builder: (controller) => ElevatedButton(
-                  onPressed: controller.check()
-                      ? () => Get.to(() => PlaySoundScreen(),
-                          transition: Transition.rightToLeft,
-                          arguments: controller.selectedAudioPath)
-                      : null,
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Plot and Edit'),
-                      Icon(Icons.arrow_forward_ios_rounded),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: buttonPadding(),
+            //   child: GetBuilder<StartScreenController>(
+            //     builder: (controller) => ElevatedButton(
+            //       onPressed: controller.check()
+            //           ? () => Get.to(() => PlaySoundScreen(),
+            //               transition: Transition.rightToLeft,
+            //               arguments: controller.selectedAudioPath)
+            //           : null,
+            //       child: const Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Text('Plot and Edit'),
+            //           Icon(Icons.arrow_forward_ios_rounded),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

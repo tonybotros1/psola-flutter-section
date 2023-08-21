@@ -33,25 +33,41 @@ class AudioListScreen extends StatelessWidget {
                         shrinkWrap: true,
                         itemCount: controller.audios.length,
                         itemBuilder: (context, i) {
+                          controller.isLoadingValues.add(false);
                           return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: Get.width,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    controller
-                                        .audioArray(snapshot.data![i].fileName);
-                                    Get.to(() => PlaySoundScreen(),
-                                        transition: Transition.rightToLeft,
-                                        arguments: snapshot.data![i].file);
-                                  },
-                                  child: Text('${snapshot.data![i].fileName}')),
-                            ),
-                          );
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: Get.width,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: GetX<AudioListScreenController>(
+                                    builder: (controller) {
+                                  return ElevatedButton(
+                                    onPressed: controller.isLoadingValues[i]
+                                        ? null
+                                        : () async {
+                                            controller.isLoadingValues[i] =
+                                                true;
+                                            await controller.audioArray(
+                                                snapshot.data![i].fileName);
+                                            controller.isLoadingValues[i] =
+                                                false;
+                                            Get.to(() => PlaySoundScreen(),
+                                                transition:
+                                                    Transition.rightToLeft,
+                                                arguments: AudiosFiles(
+                                                    file:
+                                                        snapshot.data![i].file,
+                                                    array: controller.array));
+                                          },
+                                    child: controller.isLoadingValues[i]
+                                        ? const CircularProgressIndicator() // Show loading indicator on the button
+                                        : Text('${snapshot.data![i].fileName}'),
+                                  );
+                                }),
+                              ));
                         });
                   } else {
                     return const Center(
