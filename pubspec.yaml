@@ -39,7 +39,7 @@ dependencies:
   fl_chart: ^0.62.0
   flutter_sound: ^9.2.13
   http: ^0.13.6
-  flutter_native_splash: ^2.3.2
+  # flutter_native_splash: ^2.3.2
   # syncfusion_flutter_charts: ^22.1.36
 
 
